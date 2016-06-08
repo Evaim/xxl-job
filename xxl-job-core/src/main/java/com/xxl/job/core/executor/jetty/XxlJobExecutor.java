@@ -1,5 +1,9 @@
 package com.xxl.job.core.executor.jetty;
 
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jetty.server.Connector;
@@ -7,6 +11,7 @@ import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerCollection;
 import org.eclipse.jetty.server.nio.SelectChannelConnector;
+import org.eclipse.jetty.util.Scanner;
 import org.eclipse.jetty.util.thread.ExecutorThreadPool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +37,7 @@ public class XxlJobExecutor implements ApplicationContextAware {
     public void start() throws Exception {
 
         new Thread(new Runnable() {
-            @Override
+            //@Override
             public void run() {
                 Server server = new Server();
                 server.setThreadPool(new ExecutorThreadPool(200, 200, 30000));	// 非阻塞
@@ -62,7 +67,7 @@ public class XxlJobExecutor implements ApplicationContextAware {
     }
 
     public static ApplicationContext applicationContext;
-	@Override
+	//@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 		XxlJobExecutor.applicationContext = applicationContext;
 		initJobHandler();
@@ -83,5 +88,4 @@ public class XxlJobExecutor implements ApplicationContextAware {
             }
         }
 	}
-
 }
